@@ -9,17 +9,11 @@ HEIGHT = 600
 BACKGROUND_COLOR = (100, 30, 30)  # RGB: rosso, verde, blu
 FPS = 60
 
-# Creiamo la finestra di gioco con le dimensioni scelte
-window = pygame.display.set_mode((LENGTH, HEIGHT))
+window = pygame.display.set_mode((LENGTH, HEIGHT))  # Creiamo la finestra di gioco con le dimensioni scelte
+pygame.display.set_caption("Gioco di esempio")      # Diamo un titolo alla finestra
 
-# Diamo un titolo alla finestra
-pygame.display.set_caption("Gioco di esempio")
-
-# Creiamo un oggetto "clock" per controllare il numero di fotogrammi al secondo
-clock = pygame.time.Clock()
-
-# Variabile per gestire il ciclo principale (se diventa False, il gioco si chiude)
-executing = True
+clock = pygame.time.Clock() # Controlla il numero di fotogrammi al secondo
+executing = True            # Gestisce il ciclo principale (se diventa False, il gioco si chiude)
 
 # ----- CICLO PRINCIPALE DEL GIOCO ----- #
 
@@ -36,11 +30,8 @@ while executing:
     
     # Qui disegneremo oggetti, testi, immagini, ecc.
     
-    # Aggiorniamo lo schermo
-    pygame.display.flip()
-
-    # FPS = fotogrammi al secondo
-    clock.tick(FPS) 
+    pygame.display.flip()   # Aggiorniamo lo schermo
+    clock.tick(FPS)         # FPS = fotogrammi al secondo
 
 # Quando il ciclo principale finisce chiudiamo pygame
 pygame.quit()
