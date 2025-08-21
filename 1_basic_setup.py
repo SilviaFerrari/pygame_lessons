@@ -6,7 +6,7 @@ pygame.init()
 # Definiamo la dimensione e il colore della finestra di gioco e frame
 LENGTH = 800
 HEIGHT = 600
-BACKGROUND_COLOR = (30, 30, 30)  # RGB: rosso, verde, blu
+BACKGROUND_COLOR = (100, 30, 30)  # RGB: rosso, verde, blu
 FPS = 60
 
 # Creiamo la finestra di gioco con le dimensioni scelte
