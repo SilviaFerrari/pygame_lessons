@@ -38,8 +38,8 @@ Per eseguire il codice delle lezioni:
 
 3. Apri la cartella della repo con File > Open Folder.
 
-4. Crea o apri un file .py.
+4. Apri il file che vuoi eseguire.
 
-5. Per eseguire il programma apri il terminale integrato e digita:
+5. Per eseguire il programma clicca il pulsante "Run Python File" in alto a destra, oppure apri il terminale integrato e digita:
     ```bash
     python nomefile.py
