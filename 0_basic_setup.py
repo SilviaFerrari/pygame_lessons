@@ -10,7 +10,7 @@ BACKGROUND_COLOR = (100, 30, 30)  # RGB: rosso, verde, blu
 FPS = 60
 
 window = pygame.display.set_mode((LENGTH, HEIGHT))  # Creiamo la finestra di gioco con le dimensioni scelte
-pygame.display.set_caption("Gioco di esempio")      # Diamo un titolo alla finestra
+pygame.display.set_caption("0 - Basic Setup")       # Diamo un titolo alla finestra
 
 clock = pygame.time.Clock() # Controlla il numero di fotogrammi al secondo
 executing = True            # Gestisce il ciclo principale (se diventa False, il gioco si chiude)

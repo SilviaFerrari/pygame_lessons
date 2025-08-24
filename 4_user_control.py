@@ -8,7 +8,7 @@ BACKGROUND_COLOR = (30, 30, 30)
 FPS = 60
 
 window = pygame.display.set_mode((LENGTH, HEIGHT))
-pygame.display.set_caption("Gioco di esempio")
+pygame.display.set_caption("4 - User Control")
 
 clock = pygame.time.Clock()
 executing = True

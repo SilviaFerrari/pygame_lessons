@@ -15,7 +15,7 @@ BLUE  = (0, 0, 255)
 FPS = 60
 
 window = pygame.display.set_mode((LENGTH, HEIGHT))
-pygame.display.set_caption("Lezione 1 - Forme base")
+pygame.display.set_caption("1 - Drawing Shapes")
 
 clock = pygame.time.Clock()
 executing = True
