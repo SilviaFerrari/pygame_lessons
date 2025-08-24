@@ -4,7 +4,7 @@ pygame.init()
 
 LENGTH = 800
 HEIGHT = 600
-BACKGROUND_COLOR = (30, 30, 30)
+BACKGROUND_COLOR = (0, 90, 100)
 FPS = 60
 
 window = pygame.display.set_mode((LENGTH, HEIGHT))
@@ -33,33 +33,33 @@ while executing:
 
     # ---- INPUT DA TASTIERA ---- #
 
-    keys = pygame.key.get_pressed()  # Otteniamo lo stato di tutti i tasti
+    keys = pygame.key.get_pressed() # Otteniamo lo stato di tutti i tasti
 
     # In questo caso si usano le 4 frecce
-    if keys[pygame.K_LEFT]:
-        player_x -= speed
+    if keys[pygame.K_LEFT]: 
+        player_x -= speed   # Decremento la coordinata X
 
     if keys[pygame.K_RIGHT]:
-        player_x += speed
+        player_x += speed   # Incremento la coordinata X
 
-    if keys[pygame.K_UP]:
-        player_y -= speed
+    if keys[pygame.K_UP]:   
+        player_y -= speed   # Decremento la coordinata Y
 
     if keys[pygame.K_DOWN]:
-        player_y += speed
+        player_y += speed   # Incremento la coordinata Y
 
-    # ---- Limitazione dei movimenti ai bordi della finestra ---- #
+    # ---- LIMITAZIONE DEI MOVIMENTI AI BORDI ---- #
 
-    if player_x < 0:
+    if player_x < 0:                            # Impedisco che esca da sinistra
         player_x = 0
 
-    if player_x > LENGTH - player.get_width():
+    if player_x > LENGTH - player.get_width():  # Impedisco che esca da detra
         player_x = LENGTH - player.get_width()
 
-    if player_y < 0:
+    if player_y < 0:                            # Impedisco che esca dall'alto
         player_y = 0
 
-    if player_y > HEIGHT - player.get_height():
+    if player_y > HEIGHT - player.get_height(): # Impedisco che esca da sotto
         player_y = HEIGHT - player.get_height()
 
     window.fill(BACKGROUND_COLOR)
