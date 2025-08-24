@@ -4,11 +4,11 @@ pygame.init()
 
 LENGTH = 800
 HEIGHT = 600
-BACKGROUND_COLOR = (0, 90, 100)
+BACKGROUND_COLOR = (100, 150, 100)
 FPS = 60
 
 window = pygame.display.set_mode((LENGTH, HEIGHT))
-pygame.display.set_caption("5 - Control + Animation")
+pygame.display.set_caption("6 - Obstacles Collision")
 
 clock = pygame.time.Clock()
 executing = True
@@ -49,8 +49,13 @@ left_frames = [
     pygame.image.load(os.path.join('assets', 'left_dog_4.png')).convert_alpha()
 ]
 
+# Carico l'immagine dell'ostacolo
+wood = pygame.image.load(os.path.join('assets', 'wood.png')).convert_alpha()
+wood = pygame.transform.scale(wood, (150, 150))    # Ridimensiono l'immagine
+wood_rect = wood.get_rect(center=(550, 300))       # Creo il rettangolo dell'ostacolo che servirà per la collisione
+
 # Funzione per ridimensionare tutti i frame in una lista
-def scale_frames(frames, scale_factor=0.5):
+def scale_frames(frames, scale_factor=0.8):
     scaled = []
     for img in frames:
         w, h = img.get_size()
@@ -66,7 +71,10 @@ left_frames = scale_frames(left_frames)
 # Posizione iniziale
 player_x = LENGTH // 2
 player_y = HEIGHT // 2
-speed = 5   # velocità di movimento
+speed = 5   
+
+# Creo il rettangono del player che serve per la collisione
+player_rect = front_frames[0].get_rect(center=(player_x, player_y))
 
 # Gestione animazione
 frame_index = 0
@@ -79,80 +87,61 @@ while executing:
         if event.type == pygame.QUIT:
             executing = False
 
-    keys = pygame.key.get_pressed() # Otteniamo lo stato di tutti i tasti
-
-    # ---- MOVIMENTO E SELEZIONE ANIMAZIONE ---- #
+    keys = pygame.key.get_pressed() # Stato di tutti i tasti
     
-    if keys[pygame.K_DOWN] and keys[pygame.K_RIGHT]:  # Movimento in diagonale giù a destra
-        player_y += speed/2
-        player_x += speed/2
-        current_frames = right_frames
-        frame_index += animation_speed
+    old_rect = player_rect.copy()   # Salviamo la posizione per annullare il movimento in caso di collisione
 
-    elif keys[pygame.K_DOWN] and keys[pygame.K_LEFT]: # Movimento in diagonale giù a sinistra
-        player_y += speed/2
-        player_x -= speed/2
-        current_frames = left_frames
-        frame_index += animation_speed
-
-    elif keys[pygame.K_UP] and keys[pygame.K_RIGHT]:  # Movimento in diagonale sù a destra
-        player_y -= speed
-        player_x += speed/2
-        current_frames = right_frames
-        frame_index += animation_speed
-
-    elif keys[pygame.K_UP] and keys[pygame.K_LEFT]:   # Movimento in diagonale sù a sinistra
-        player_y -= speed
-        player_x -= speed/2
-        current_frames = left_frames
-        frame_index += animation_speed            
-
-    elif keys[pygame.K_DOWN]:           # Movimento verso il basso
-        player_y += speed
+    if keys[pygame.K_DOWN]:
+        player_rect.y += speed
         current_frames = front_frames
         frame_index += animation_speed    
 
-    elif keys[pygame.K_RIGHT]:          # Movimento verso destra
-        player_x += speed
+    elif keys[pygame.K_RIGHT]:
+        player_rect.x += speed
         current_frames = right_frames
         frame_index += animation_speed
 
-    elif keys[pygame.K_UP]:             # Movimento verso l'alto
-        player_y -= speed
+    elif keys[pygame.K_UP]:
+        player_rect.y -= speed
         current_frames = back_frames
         frame_index += animation_speed
 
-    elif keys[pygame.K_LEFT]:           # Movimento verso sinistra
-        player_x -= speed
+    elif keys[pygame.K_LEFT]:
+        player_rect.x -= speed
         current_frames = left_frames
         frame_index += animation_speed
 
     else:
-        frame_index = 0     # Se non si preme nulla, usa il frame 0 dell'animazione corrente.
+        frame_index = 0
 
-    # ---- GESTIONE CICLICA DEI FRAME ---- #
+    # ---- COLLISIONE CON L'OSTACOLO ---- #
+
+    if player_rect.colliderect(wood_rect):
+        player_rect = old_rect  # Se si scontra torna indietro    
+
+    # ---- GESTIONE CICLICA DEI FRAME ---- #    
 
     if frame_index >= len(current_frames):  # Se ho finito i frame, ricomincio l'animazione dall'indice 1.
         frame_index = 1                     # Il frame 0 serve solo se sono fermo, non per l'animazione.
 
     player = current_frames[int(frame_index)]   # Seleziona l’immagine corrispondente da mostrare.
 
-    # ---- LIMITAZIONE DEI MOVIMENTI AI BORDI ---- #
+    if player_rect.left < 0:
+        player_rect.left = 0
 
-    if player_x < 0:
-        player_x = 0
+    if player_rect.right > LENGTH:
+        player_rect.right = LENGTH
 
-    if player_x > LENGTH - player.get_width():
-        player_x = LENGTH - player.get_width()
+    if player_rect.top < 0:
+        player_rect.top = 0
 
-    if player_y < 0:
-        player_y = 0
+    if player_rect.bottom > HEIGHT:
+        player_rect.bottom = HEIGHT
 
-    if player_y > HEIGHT - player.get_height():
-        player_y = HEIGHT - player.get_height()
 
     window.fill(BACKGROUND_COLOR)
-    window.blit(player, (player_x, player_y))
+    window.blit(wood, wood_rect)        # Disegna l'ostacolo
+    window.blit(player, player_rect)    # Disegna il player
 
     pygame.display.flip()
     clock.tick(FPS)
