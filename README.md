@@ -1,45 +1,46 @@
-# 📚 Lezioni di Pygame
+# 📚 Pygame Lessons
 
-Questa repository contiene piccole lezioni ed esempi pratici per imparare ad usare **Pygame Community Edition (pygame-ce)**, una libreria per la creazione di videogiochi in Python.
+This repository contains short lessons and practical examples to learn how to use **Pygame Community Edition (pygame-ce)**, a library for creating video games in Python.
 
 ---
 
-## Installazione di Python
+## Installing Python
 
-1. Vai al sito ufficiale: [https://www.python.org/downloads/](https://www.python.org/downloads/)
-2. Scarica l’ultima versione stabile di Python.
-3. Durante l’installazione **spunta l’opzione "Add Python to PATH"**.
-4. Verifica l’installazione aprendo il terminale e digitando:
+1. Go to the official website: [https://www.python.org/downloads/](https://www.python.org/downloads/)
+2. Download the latest stable version of Python.
+3. During installation, **check the "Add Python to PATH"** option.
+4. Verify the installation by opening a terminal and typing:
 
    ```bash
    python --version
 
-## Installazione di Pygame Community Edition (pygame-ce)
+## Installing Pygame Community Edition (pygame-ce)
 
-Dopo aver installato Python:
+After installing Python:
 
-1. Apri il terminale.
+1. Open a terminal.
 
-2. Installa pygame-ce con:
+2. Install pygame-ce with:
     ```bash
     pip install pygame-ce
 
-3. Per verificare che sia installato correttamente:
+3. To verify that it is installed correctly:
     ```bash
     python -m pygame --version
 
-## Utilizzo di Visual Studio Code
+## Using Visual Studio Code
 
-Per eseguire il codice delle lezioni:
+To run the lesson code:
 
-1. Scarica e installa Visual Studio Code: https://code.visualstudio.com/
+1. Download and install Visual Studio Code: https://code.visualstudio.com/
 
-2. Installa l’estensione Python (sviluppata da Microsoft).
+2. Install the Python extension (developed by Microsoft).
 
-3. Apri la cartella della repo con File > Open Folder.
+3. Open the repo folder with File > Open Folder.
 
-4. Apri il file che vuoi eseguire.
+4. Open the file you want to run.
 
-5. Per eseguire il programma clicca il pulsante "Run Python File" in alto a destra, oppure apri il terminale integrato e digita:
+5. To run the program, click the "Run Python File" button in the upper-right corner,<br />
+   or open the integrated terminal and type:
     ```bash
     python nomefile.py
