@@ -84,10 +84,13 @@ while executing:
     elif keys[pygame.K_LEFT]:
         player_x -= speed
         current_frames = left_frames
-        frame_index += animation_speed
+        frame_index += animation_speed    
 
     else:
-        frame_index = 0     
+        frame_index = 0   
+
+    if keys[pygame.K_SPACE] and is_jumping:
+        frame_index = 1      
 
     # ---- SALTO E GRAVITÀ ---- #
 
