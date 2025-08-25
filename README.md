@@ -40,6 +40,7 @@ To run the lesson code:
 
 4. Open the file you want to run.
 
-5. To run the program, click the "Run Python File" button in the upper-right corner, or open the integrated terminal and type:
+5. To run the program, click the "Run Python File" button in the upper-right corner,<br />
+   or open the integrated terminal and type:
     ```bash
     python nomefile.py
