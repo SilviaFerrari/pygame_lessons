@@ -7,6 +7,8 @@ HEIGHT = 600
 BACKGROUND_COLOR = (30, 30, 100)
 FPS = 60
 
+CHS_PATH = 'assets/characters'
+
 window = pygame.display.set_mode((LENGTH, HEIGHT))
 pygame.display.set_caption("3 - Frame Animation")
 
@@ -15,10 +17,10 @@ executing = True
 
 # Caricamento dei frame per simulare il movimento
 frames = [
-    pygame.image.load(os.path.join('assets', 'right_dog_1.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'right_dog_2.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'right_dog_3.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'right_dog_4.png')).convert_alpha()
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_1.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_2.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_3.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_4.png')).convert_alpha()
 ]
 
 # Ridimensionamento proporzionale di tutti i frame

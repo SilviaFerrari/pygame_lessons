@@ -7,6 +7,8 @@ HEIGHT = 600
 BACKGROUND_COLOR = (0, 90, 100)
 FPS = 60
 
+CHS_PATH = 'assets/characters'
+
 window = pygame.display.set_mode((LENGTH, HEIGHT))
 pygame.display.set_caption("5 - Control + Animation")
 
@@ -15,38 +17,38 @@ executing = True
 
 # Movimento verso il basso
 front_frames = [
-    pygame.image.load(os.path.join('assets', 'front_dog_0.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'front_dog_1.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'front_dog_2.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'front_dog_3.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'front_dog_4.png')).convert_alpha()
+    pygame.image.load(os.path.join(CHS_PATH, 'front_dog_0.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'front_dog_1.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'front_dog_2.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'front_dog_3.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'front_dog_4.png')).convert_alpha()
 ]
 
 # Movimento verso destra
 right_frames = [
-    pygame.image.load(os.path.join('assets', 'right_dog_0.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'right_dog_1.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'right_dog_2.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'right_dog_3.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'right_dog_4.png')).convert_alpha()
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_0.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_1.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_2.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_3.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_4.png')).convert_alpha()
 ]
 
 # Movimento verso l'alto
 back_frames = [
-    pygame.image.load(os.path.join('assets', 'back_dog_0.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'back_dog_1.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'back_dog_2.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'back_dog_3.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'back_dog_4.png')).convert_alpha()
+    pygame.image.load(os.path.join(CHS_PATH, 'back_dog_0.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'back_dog_1.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'back_dog_2.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'back_dog_3.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'back_dog_4.png')).convert_alpha()
 ]
 
 # Movimento verso sinistra
 left_frames = [
-    pygame.image.load(os.path.join('assets', 'left_dog_0.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'left_dog_1.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'left_dog_2.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'left_dog_3.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'left_dog_4.png')).convert_alpha()
+    pygame.image.load(os.path.join(CHS_PATH, 'left_dog_0.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'left_dog_1.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'left_dog_2.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'left_dog_3.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'left_dog_4.png')).convert_alpha()
 ]
 
 # Funzione per ridimensionare tutti i frame in una lista

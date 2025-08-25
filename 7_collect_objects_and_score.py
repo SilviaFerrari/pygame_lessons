@@ -8,6 +8,9 @@ HEIGHT = 800
 BACKGROUND_COLOR = (100, 150, 100)
 FPS = 60
 
+CHS_PATH = 'assets/characters'
+ITEMS_PATH = 'assets/items'
+
 window = pygame.display.set_mode((LENGTH, HEIGHT))
 pygame.display.set_caption("7 - Collect Objects and Score")
 
@@ -16,41 +19,45 @@ executing = True
 
 # ---- FRAMES PLAYER ---- #
 
+# Movimento verso il basso
 front_frames = [
-    pygame.image.load(os.path.join('assets', 'front_dog_0.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'front_dog_1.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'front_dog_2.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'front_dog_3.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'front_dog_4.png')).convert_alpha()
+    pygame.image.load(os.path.join(CHS_PATH, 'front_dog_0.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'front_dog_1.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'front_dog_2.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'front_dog_3.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'front_dog_4.png')).convert_alpha()
 ]
 
+# Movimento verso destra
 right_frames = [
-    pygame.image.load(os.path.join('assets', 'right_dog_0.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'right_dog_1.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'right_dog_2.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'right_dog_3.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'right_dog_4.png')).convert_alpha()
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_0.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_1.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_2.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_3.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'right_dog_4.png')).convert_alpha()
 ]
 
+# Movimento verso l'alto
 back_frames = [
-    pygame.image.load(os.path.join('assets', 'back_dog_0.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'back_dog_1.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'back_dog_2.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'back_dog_3.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'back_dog_4.png')).convert_alpha()
+    pygame.image.load(os.path.join(CHS_PATH, 'back_dog_0.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'back_dog_1.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'back_dog_2.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'back_dog_3.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'back_dog_4.png')).convert_alpha()
 ]
 
+# Movimento verso sinistra
 left_frames = [
-    pygame.image.load(os.path.join('assets', 'left_dog_0.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'left_dog_1.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'left_dog_2.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'left_dog_3.png')).convert_alpha(),
-    pygame.image.load(os.path.join('assets', 'left_dog_4.png')).convert_alpha()
+    pygame.image.load(os.path.join(CHS_PATH, 'left_dog_0.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'left_dog_1.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'left_dog_2.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'left_dog_3.png')).convert_alpha(),
+    pygame.image.load(os.path.join(CHS_PATH, 'left_dog_4.png')).convert_alpha()
 ]
-
+    
 # ---- OGGETTO RACCOGLIBILE ---- #
 
-bone = pygame.image.load(os.path.join('assets', 'bone.png')).convert_alpha()                        # Carico l'immagine
+bone = pygame.image.load(os.path.join(ITEMS_PATH, 'bone.png')).convert_alpha()                        # Carico l'immagine
 bone = pygame.transform.scale(bone, (70, 35))                                                       # La scalo
 bone_rect = bone.get_rect(center=(random.randint(50, LENGTH-50), random.randint(50, HEIGHT-50)))    # Ne creo il rettangolo
 

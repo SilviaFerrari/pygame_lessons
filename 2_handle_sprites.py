@@ -7,6 +7,13 @@ HEIGHT = 600
 BACKGROUND_COLOR = (30, 30, 100)
 FPS = 60
 
+''' 
+Salvo il percorso delle cartelle in cui si trova l'immagine della sprite. 
+In futuro se avrò bisogno di cambiarlo, mi basterà modificare questa stringa senza mettere mano al codice.
+Diventa estremamente utile quando lavoriamo con tantissime immagini.
+'''
+CHS_PATH = 'assets/characters'
+
 window = pygame.display.set_mode((LENGTH, HEIGHT))
 pygame.display.set_caption("2 - Handle Sprites")
 
@@ -15,7 +22,7 @@ executing = True
 
 # ----- GESTIONE DI UNA SPRITE ----- #
 
-seal = pygame.image.load(os.path.join('assets', 'seal.png')).convert_alpha()  # Carico l'immagine dalla cartella "assets"
+seal = pygame.image.load(os.path.join(CHS_PATH, 'seal.png')).convert_alpha()  # Carico l'immagine dalla cartella "assets"
 
 seal = pygame.transform.scale(seal, (200, 150))     # Ridimensiono l’immagine
 seal_x = 0                                          # Definisco la coordinata iniziale sull’asse X
