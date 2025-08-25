@@ -89,7 +89,7 @@ while executing:
 
     # ---- MOVIMENTO E SELEZIONE ANIMAZIONE ---- #
 
-    if keys[pygame.K_DOWN]:           # Movimento verso il basso
+    if keys[pygame.K_DOWN]:             # Movimento verso il basso
         player_y += speed
         current_frames = front_frames
         frame_index += animation_speed    

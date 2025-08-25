@@ -52,11 +52,12 @@ speed = 5   # velocità di movimento
 
 # Gestione animazione
 frame_index = 0
-animation_speed = 0.15          # più basso = più lento
-current_frames = right_frames   # animazione attuale
-player = current_frames[0]      # frame attuale
+animation_speed = 0.15          
+current_frames = right_frames   
+player = current_frames[0]      
 
 # --- PAVIMENTO E SALTO --- #
+
 floor_y = HEIGHT - 50   # posizione del pavimento
 gravity = 0.8           # forza con cui cade
 jump_strength = -15     # forza del salto (negativa = verso l’alto)
@@ -73,9 +74,8 @@ while executing:
                 velocity_y = jump_strength
                 is_jumping = True
 
-    keys = pygame.key.get_pressed() # Otteniamo lo stato di tutti i tasti
+    keys = pygame.key.get_pressed() 
 
-    # ---- MOVIMENTO ORIZZONTALE E SELEZIONE ANIMAZIONE ---- #
     if keys[pygame.K_RIGHT]:
         player_x += speed
         current_frames = right_frames
@@ -87,20 +87,27 @@ while executing:
         frame_index += animation_speed
 
     else:
-        frame_index = 0     # Se non si preme nulla, usa il frame 0
+        frame_index = 0     
 
     # ---- SALTO E GRAVITÀ ---- #
-    velocity_y += gravity           # applica la gravità
-    player_y += velocity_y          # muovi il cane in verticale
 
-    if player_y >= floor_y - player.get_height():  # se tocca il pavimento
-        player_y = floor_y - player.get_height()
-        velocity_y = 0
-        is_jumping = False
+    velocity_y += gravity           # applica la gravità
+    player_y += velocity_y          # muove il cane in verticale
+
+    # --- COLLISIONE CON IL PAVIMENTO --- #
+    # Se la parte bassa del cane scende oltre il livello del pavimento
+    # lo riposizioniamo esattamente sopra il pavimento, evitando che "affondi".
+
+    if player_y >= floor_y - player.get_height():  
+        player_y = floor_y - player.get_height()    
+        velocity_y = 0      # Azzeriamo la velocità verticale (il salto è finito).
+        is_jumping = False  # Indichiamo che il cane NON sta più saltando (può saltare di nuovo).
 
     # ---- GESTIONE CICLICA DEI FRAME ---- #
+
     if frame_index >= len(current_frames):
         frame_index = 1
+
     player = current_frames[int(frame_index)]
 
     # ---- LIMITAZIONE DEI MOVIMENTI AI BORDI LATERALI ---- #
@@ -112,7 +119,7 @@ while executing:
     # ---- DISEGNO ---- #
     window.fill(BACKGROUND_COLOR)
 
-    # disegno il pavimento
+    # Disegno il pavimento
     pygame.draw.rect(window, (50, 200, 50), (0, floor_y, LENGTH, HEIGHT - floor_y))
 
     window.blit(player, (player_x, player_y))

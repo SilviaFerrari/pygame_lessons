@@ -59,8 +59,7 @@ animation_speed = 0.15
 current_frames = right_frames
 player = current_frames[0]
 
-# --- BACKGROUND SCROLLING --- #
-bg_scroll_x = 0   # quanto si è spostato lo sfondo
+bg_scroll_x = 0   # Tiene traccia di quanto si è spostato lo sfondo
 
 while executing:
     for event in pygame.event.get():
@@ -69,15 +68,18 @@ while executing:
 
     keys = pygame.key.get_pressed()
 
-    # Movimento solo destra/sinistra
-    if keys[pygame.K_RIGHT]:
-        bg_scroll_x -= speed  # lo sfondo si muove a sinistra
+    # --- BACKGROUND SCROLLING INTEGRATA ALL'ANIMAZIONE --- #
+
+    if keys[pygame.K_RIGHT]:            # Lo sfondo si muove a sinistra
+        bg_scroll_x -= speed  
         current_frames = right_frames
         frame_index += animation_speed
-    elif keys[pygame.K_LEFT]:
-        bg_scroll_x += speed  # lo sfondo si muove a destra
+
+    elif keys[pygame.K_LEFT]:           # Lo sfondo si muove a destra
+        bg_scroll_x += speed  
         current_frames = left_frames
         frame_index += animation_speed
+
     else:
         frame_index = 0
 
@@ -90,8 +92,10 @@ while executing:
         bg_scroll_x = 0
 
     # ---- ANIMAZIONE PLAYER ---- #
+
     if frame_index >= len(current_frames):
         frame_index = 1
+        
     player = current_frames[int(frame_index)]
 
     # Disegniamo due copie dello sfondo: una in posizione corrente, l’altra subito dopo
