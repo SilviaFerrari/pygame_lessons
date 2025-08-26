@@ -7,14 +7,16 @@ HEIGHT = 600
 BACKGROUND_COLOR = (0, 90, 100)
 FPS = 60
 
+CHS_PATH = 'assets/characters'
+
 window = pygame.display.set_mode((LENGTH, HEIGHT))
-pygame.display.set_caption("4 - User Control")
+pygame.display.set_caption("4.1 - User Control Border")
 
 clock = pygame.time.Clock()
 executing = True
 
 # Carichiamo l’immagine del personaggio
-player = pygame.image.load(os.path.join('assets', 'seal.png')).convert_alpha()  
+player = pygame.image.load(os.path.join(CHS_PATH, 'seal.png')).convert_alpha()  
 
 # Ridimensioniamo proporzionalmente con un fattore di scala
 orig_w, orig_h = player.get_size()
@@ -53,7 +55,7 @@ while executing:
     if player_x < 0:                            # Impedisco che esca da sinistra
         player_x = 0
 
-    if player_x > LENGTH - player.get_width():  # Impedisco che esca da detra
+    if player_x > LENGTH - player.get_width():  # Impedisco che esca da destra
         player_x = LENGTH - player.get_width()
 
     if player_y < 0:                            # Impedisco che esca dall'alto

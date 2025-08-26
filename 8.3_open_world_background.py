@@ -4,17 +4,21 @@ pygame.init()
 
 LENGTH = 800
 HEIGHT = 600
-BACKGROUND_COLOR = (100, 150, 100)
+BACKGROUND_COLOR = (0, 90, 100)
 FPS = 60
 
 CHS_PATH = 'assets/characters'
-OBS_PATH = 'assets/obstacles'
+BCKS_PATH = 'assets/backgrounds'
 
 window = pygame.display.set_mode((LENGTH, HEIGHT))
-pygame.display.set_caption("6 - Obstacles Collision")
+pygame.display.set_caption("8.3 - Open World Backgorung")
 
 clock = pygame.time.Clock()
 executing = True
+
+# Carichiamo uno sfondo PIÙ GRANDE della finestra (es: 1600x1200)
+background = pygame.image.load(os.path.join(BCKS_PATH, "village_map.png")).convert()
+bg_width, bg_height = background.get_size()
 
 # Movimento verso il basso
 front_frames = [
@@ -52,11 +56,6 @@ left_frames = [
     pygame.image.load(os.path.join(CHS_PATH, 'left_dog_4.png')).convert_alpha()
 ]
 
-# Carico l'immagine dell'ostacolo
-wood = pygame.image.load(os.path.join(OBS_PATH, 'wood.png')).convert_alpha()
-wood = pygame.transform.scale(wood, (150, 150))    # Ridimensiono l'immagine
-wood_rect = wood.get_rect(center=(550, 300))       # Creo il rettangolo dell'ostacolo che servirà per la collisione
-
 # Funzione per ridimensionare tutti i frame in una lista
 def scale_frames(frames, scale_factor=0.5):
     scaled = []
@@ -71,13 +70,9 @@ right_frames = scale_frames(right_frames)
 back_frames = scale_frames(back_frames)
 left_frames = scale_frames(left_frames)
 
-# Posizione iniziale
-player_x = LENGTH // 2
-player_y = HEIGHT // 2
+# Posizione del player nel ** MONDO DI GIOCO NON NELLA FINESTRA! **
+player_x, player_y = bg_width // 2, bg_height // 2
 speed = 5   
-
-# Creo il rettangono del player che serve per la collisione
-player_rect = front_frames[0].get_rect(center=(player_x, player_y))
 
 # Gestione animazione
 frame_index = 0
@@ -90,61 +85,83 @@ while executing:
         if event.type == pygame.QUIT:
             executing = False
 
-    keys = pygame.key.get_pressed() # Stato di tutti i tasti
-    
-    old_rect = player_rect.copy()   # Salviamo la posizione per annullare il movimento in caso di collisione
+    keys = pygame.key.get_pressed() # Otteniamo lo stato di tutti i tasti
 
-    if keys[pygame.K_DOWN]:
-        player_rect.y += speed
+    # ---- MOVIMENTO E SELEZIONE ANIMAZIONE ---- #
+
+    if keys[pygame.K_DOWN]:             # Movimento verso il basso
+        player_y += speed
         current_frames = front_frames
         frame_index += animation_speed    
 
-    elif keys[pygame.K_RIGHT]:
-        player_rect.x += speed
+    elif keys[pygame.K_RIGHT]:          # Movimento verso destra
+        player_x += speed
         current_frames = right_frames
         frame_index += animation_speed
 
-    elif keys[pygame.K_UP]:
-        player_rect.y -= speed
+    elif keys[pygame.K_UP]:             # Movimento verso l'alto
+        player_y -= speed
         current_frames = back_frames
         frame_index += animation_speed
 
-    elif keys[pygame.K_LEFT]:
-        player_rect.x -= speed
+    elif keys[pygame.K_LEFT]:           # Movimento verso sinistra
+        player_x -= speed
         current_frames = left_frames
         frame_index += animation_speed
 
     else:
-        frame_index = 0
+        frame_index = 0     
 
-    # ---- COLLISIONE CON L'OSTACOLO ---- #
+    # ---- GESTIONE CICLICA DEI FRAME ---- #
 
-    if player_rect.colliderect(wood_rect):
-        player_rect = old_rect  # Se si scontra torna indietro    
+    if frame_index >= len(current_frames):  
+        frame_index = 1                     
 
-    # ---- GESTIONE CICLICA DEI FRAME ---- #    
+    player = current_frames[int(frame_index)]   
 
-    if frame_index >= len(current_frames):  # Se ho finito i frame, ricomincio l'animazione dall'indice 1.
-        frame_index = 1                     # Il frame 0 serve solo se sono fermo, non per l'animazione.
+    # ---- LIMITAZIONE DEL PLAYER AI BORDI ---- #
 
-    player = current_frames[int(frame_index)]   # Seleziona l’immagine corrispondente da mostrare.
+    if player_x < 0:
+        player_x = 0
 
-    if player_rect.left < 0:
-        player_rect.left = 0
+    if player_x > bg_width - player.get_width():    # Usa lo sfondo, non la finestra
+        player_x = bg_width - player.get_width()
 
-    if player_rect.right > LENGTH:
-        player_rect.right = LENGTH
+    if player_y < 0:
+        player_y = 0
 
-    if player_rect.top < 0:
-        player_rect.top = 0
+    if player_y > bg_height - player.get_height():  # Usa lo sfondo, non la finestra
+        player_y = bg_height - player.get_height()
 
-    if player_rect.bottom > HEIGHT:
-        player_rect.bottom = HEIGHT
+    # ---- CAMERA ---- #
 
+    # E' un "rettangolo virtuale" che rappresenta cosa vediamo, CENTRATA SUL PLAYER
+    camera_x = player_x - LENGTH // 2
+    camera_y = player_y - HEIGHT // 2
 
-    window.fill(BACKGROUND_COLOR)
-    window.blit(wood, wood_rect)        # Disegna l'ostacolo
-    window.blit(player, player_rect)    # Disegna il player
+    # Impediamo alla camera di uscire dai bordi dello sfondo
+    if camera_x < 0: 
+        camera_x = 0
+
+    if camera_y < 0: 
+        camera_y = 0
+
+    if camera_x > bg_width - LENGTH: 
+        camera_x = bg_width - LENGTH
+
+    if camera_y > bg_height - HEIGHT: 
+        camera_y = bg_height - HEIGHT
+
+    # ---- DISEGNO DELLA VIEWPORT ---- #
+
+    # Disegniamo SOLO la porzione di sfondo che coincide con la finestra.
+    window.blit(background, (0, 0), (camera_x, camera_y, LENGTH, HEIGHT))
+
+    # La posizione del player sullo schermo NON è player_x, player_y,
+    # ma la sua posizione relativa alla camera.
+    screen_x = player_x - camera_x
+    screen_y = player_y - camera_y
+    window.blit(player, (screen_x, screen_y))
 
     pygame.display.flip()
     clock.tick(FPS)
