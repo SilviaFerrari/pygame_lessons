@@ -10,7 +10,7 @@ CHS_PATH = 'assets/characters'
 BCKS_PATH = 'assets/backgrounds'
 
 window = pygame.display.set_mode((LENGTH, HEIGHT))
-pygame.display.set_caption("Infinite Background Scrolling")
+pygame.display.set_caption("8.2 - Infinite Background Scrolling")
 
 clock = pygame.time.Clock()
 executing = True
@@ -51,11 +51,11 @@ left_frames = scale_frames(left_frames)
 # Posizione del player FISSO AL CENTRO DELLA FINESTRA
 player_x = LENGTH // 2
 player_y = HEIGHT - 150
-speed = 5
+speed = 1.5
 
 # Gestione animazione
 frame_index = 0
-animation_speed = 0.15
+animation_speed = 0.10
 current_frames = right_frames
 player = current_frames[0]
 
