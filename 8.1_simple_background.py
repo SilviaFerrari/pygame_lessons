@@ -2,7 +2,7 @@ import pygame, os
 
 pygame.init()
 
-LENGTH = 800
+LENGTH = 1000
 HEIGHT = 600
 FPS = 60
 
