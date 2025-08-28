@@ -7,12 +7,12 @@ HEIGHT = 600
 BACKGROUND_COLOR = (30, 30, 100)
 FPS = 60
 
+CHS_PATH = 'assets/characters'
 ''' 
 Salvo il percorso delle cartelle in cui si trova l'immagine della sprite. 
 In futuro se avrò bisogno di cambiarlo, mi basterà modificare questa stringa senza mettere mano al codice.
 Diventa estremamente utile quando lavoriamo con tantissime immagini.
 '''
-CHS_PATH = 'assets/characters'
 
 window = pygame.display.set_mode((LENGTH, HEIGHT))
 pygame.display.set_caption("2 - Handle Sprites")

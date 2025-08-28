@@ -57,27 +57,27 @@ left_frames = [
     
 # ---- OGGETTO RACCOGLIBILE ---- #
 
-bone = pygame.image.load(os.path.join(ITEMS_PATH, 'bone.png')).convert_alpha()                        # Carico l'immagine
+bone = pygame.image.load(os.path.join(ITEMS_PATH, 'bone.png')).convert_alpha()                      # Carico l'immagine
 bone = pygame.transform.scale(bone, (70, 35))                                                       # La scalo
 bone_rect = bone.get_rect(center=(random.randint(50, LENGTH-50), random.randint(50, HEIGHT-50)))    # Ne creo il rettangolo
 
 # ---- SCALING DELLE IMMAGINI ---- #
 
-def scale_frames(frames, scale_factor=0.7):
-    scaled = []
-    for img in frames:
-        w, h = img.get_size()
-        scaled.append(pygame.transform.scale(img, (int(w * scale_factor), int(h * scale_factor))))
-    return scaled
+def scale_frames(frames, scale_factor): 
+    scaled_frames = []                  
+    for img in frames:                  
+        w, h = img.get_size()           
+        scaled_frames.append(pygame.transform.scale(img, (int(w * scale_factor), int(h * scale_factor))))
+    return scaled_frames
 
-front_frames = scale_frames(front_frames)
-right_frames = scale_frames(right_frames)
-back_frames = scale_frames(back_frames)
-left_frames = scale_frames(left_frames)
+front_frames = scale_frames(front_frames, 0.5)
+right_frames = scale_frames(right_frames, 0.5)
+back_frames = scale_frames(back_frames, 0.5)
+left_frames = scale_frames(left_frames, 0.5)
 
 # ---- PLAYER ---- #
-
-player_rect = front_frames[0].get_rect(center=(LENGTH // 2, HEIGHT // 2))   # Creo il rettangolo 
+# Creo il rettangolo del player per la collisione
+player_rect = front_frames[0].get_rect(center=(LENGTH // 2, HEIGHT // 2))   
 
 speed = 5
 frame_index = 0
@@ -86,9 +86,8 @@ current_frames = front_frames
 player = current_frames[0]
 
 # ---- SCORE ---- #
-
 score = 0                                   # Definisco il punteggio di base
-font = pygame.font.SysFont("Arial", 30)     # Stile della scritta
+arial_font = pygame.font.SysFont("Arial", 30)     # Stile della scritta
 
 while executing:
     for event in pygame.event.get():
@@ -166,8 +165,8 @@ while executing:
     window.blit(player, player_rect)
 
     # ---- MOSTRO IL PUNTEGGIO ---- #
-
-    score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+    # Crea una superficie contenente il testo
+    score_text = arial_font.render(f"Score: {score}", True, (255, 255, 255))
     window.blit(score_text, (10, 10))
 
     pygame.display.flip()

@@ -52,18 +52,18 @@ left_frames = [
 ]
 
 # Funzione per ridimensionare tutti i frame in una lista
-def scale_frames(frames, scale_factor=0.5):
-    scaled = []
-    for img in frames:
-        w, h = img.get_size()
-        scaled.append(pygame.transform.scale(img, (int(w * scale_factor), int(h * scale_factor))))
-    return scaled
+def scale_frames(frames, scale_factor): # La funzione richiede la lista di frame da ridimensionare
+    scaled_frames = []                  # Definisce la nuova lista di frame
+    for img in frames:                  # Per ogni frame prende larghezza e altezza
+        w, h = img.get_size()           # Aggiunge l'immagine ridimensionata alla nuova lista
+        scaled_frames.append(pygame.transform.scale(img, (int(w * scale_factor), int(h * scale_factor))))
+    return scaled_frames
 
 # Ridimensioniamo le liste
-front_frames = scale_frames(front_frames)
-right_frames = scale_frames(right_frames)
-back_frames = scale_frames(back_frames)
-left_frames = scale_frames(left_frames)
+front_frames = scale_frames(front_frames, 0.5)
+right_frames = scale_frames(right_frames, 0.5)
+back_frames = scale_frames(back_frames, 0.5)
+left_frames = scale_frames(left_frames, 0.5)
 
 # Posizione iniziale
 player_x = LENGTH // 2
@@ -83,7 +83,7 @@ while executing:
 
     keys = pygame.key.get_pressed() # Otteniamo lo stato di tutti i tasti
 
-    # ---- MOVIMENTO E SELEZIONE ANIMAZIONE ---- #
+    # ---- MOVIMENTI IN DIAGIONALE ---- #
     
     if keys[pygame.K_DOWN] and keys[pygame.K_RIGHT]:  # Movimento in diagonale giù a destra
         player_y += speed/2
@@ -107,7 +107,9 @@ while executing:
         player_y -= speed
         player_x -= speed/2
         current_frames = left_frames
-        frame_index += animation_speed            
+        frame_index += animation_speed        
+
+    # ---- MOVIMENTI IN LINEA RETTA ---- #       
 
     elif keys[pygame.K_DOWN]:           # Movimento verso il basso
         player_y += speed
