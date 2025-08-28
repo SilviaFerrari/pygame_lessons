@@ -3,11 +3,13 @@ import pygame  # importiamo la libreria pygame-ce
 # Inizializzazione di tutte le funzioni di pygame (grafica, suoni, ecc.)
 pygame.init()
 
-# Definiamo la dimensione e il colore della finestra di gioco e frame
-LENGTH = 800
-HEIGHT = 600
+# ---- FINESTRA DI GIOCO ---- #
+
+LENGTH = 800    # dimensione lunghezza in pixel
+HEIGHT = 600    # dimensione altezza in pixel
 BACKGROUND_COLOR = (100, 30, 30)  # RGB: rosso, verde, blu
-FPS = 60
+FPS = 60        # framerate massimo (FPS = fotogrammi al secondo)
+                # Non è altro che la frequenza di aggiornamento delle immagini sullo schermo.
 
 window = pygame.display.set_mode((LENGTH, HEIGHT))  # Creiamo la finestra di gioco con le dimensioni scelte
 pygame.display.set_caption("0 - Basic Setup")       # Diamo un titolo alla finestra
@@ -31,7 +33,7 @@ while executing:
     # Qui disegneremo oggetti, testi, immagini, ecc.
     
     pygame.display.flip()   # Aggiorniamo lo schermo
-    clock.tick(FPS)         # FPS = fotogrammi al secondo
+    clock.tick(FPS)         # Misurazione del tempo in pygame
 
 # Quando il ciclo principale finisce chiudiamo pygame
 pygame.quit()

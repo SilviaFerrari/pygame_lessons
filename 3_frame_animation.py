@@ -23,12 +23,20 @@ frames = [
     pygame.image.load(os.path.join(CHS_PATH, 'right_dog_4.png')).convert_alpha()
 ]
 
-# Ridimensionamento proporzionale di tutti i frame
+# ---- RIDIMENSIONARE UNA LISTA DI FRAME ---- #
+
 orig_w, orig_h = frames[0].get_size()   # Prendiamo la larghezza e altezza originali della prima immagine
 scale_factor = 1                        # Scegliamo un fattore di scala (0.5 = metà dimensioni, 1 = dimensione originale)
 
-frames = [pygame.transform.scale(frame, 
-            (int(orig_w * scale_factor), int(orig_h * scale_factor))) for frame in frames]
+scaled_frames = []                      # Lista vuota dove metteremo i frame ridimensionati
+
+for frame in frames:                                                        # Per ogni frame della lista:    
+    new_width = int(orig_w * scale_factor)                                  # calcoliamo la nuova larghezza,
+    new_height = int(orig_h * scale_factor)                                 # calcoliamo la nuova altezza,
+    scaled_frame = pygame.transform.scale(frame, (new_width, new_height))   # ridimensioniamo il frame
+    scaled_frames.append(scaled_frame)                                      # e aggiungiamo il frame ridimensionato alla nuova lista.
+
+frames = scaled_frames  # Sostituiamo i frame originali con i nuovi ridimensionati.
 
 # Dati dei frame
 frame_index = 0                                     # Indica quale frame mostrare

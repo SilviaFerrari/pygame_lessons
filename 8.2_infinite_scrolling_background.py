@@ -37,16 +37,17 @@ left_frames = [
     pygame.image.load(os.path.join(CHS_PATH, 'left_dog_4.png')).convert_alpha()
 ]
 
-# Funzione per ridimensionare tutti i frame in una lista
-def scale_frames(frames, scale_factor=0.5):
-    scaled = []
-    for img in frames:
-        w, h = img.get_size()
-        scaled.append(pygame.transform.scale(img, (int(w * scale_factor), int(h * scale_factor))))
-    return scaled
+# ---- SCALING DELLE IMMAGINI ---- #
 
-right_frames = scale_frames(right_frames)
-left_frames = scale_frames(left_frames)
+def scale_frames(frames, scale_factor): 
+    scaled_frames = []                  
+    for img in frames:                  
+        w, h = img.get_size()           
+        scaled_frames.append(pygame.transform.scale(img, (int(w * scale_factor), int(h * scale_factor))))
+    return scaled_frames
+
+right_frames = scale_frames(right_frames, 0.5)
+left_frames = scale_frames(left_frames, 0.5)
 
 # Posizione del player FISSO AL CENTRO DELLA FINESTRA
 player_x = LENGTH // 2
