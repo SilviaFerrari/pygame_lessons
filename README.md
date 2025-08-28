@@ -47,14 +47,14 @@ To run the lesson code:
     python nomefile.py
     ```
 
-## 💢 I need moore sprites!
+## 💢 I need more sprites!
 
 If you're developing your own video game, probably you'll to need other characters, items and more.<br />
-Graphics in video games it's a very **onerous job** and I won't recommend doing it completely by your 
-self if you don't have any experience...<br />
+Graphics in video games it's a very **onerous job** and I won't recommend doing it completely by your self.<br />
 The best thing you can do is use sprites and backgrounds already made by some underpaid artist.
 
 "So, where can I find them, without creating from scratch?"<br />
+
 Short answer: on Google.<br />
 Long answer: you have multiple options:
 
@@ -71,6 +71,6 @@ Well yes, that sucks, but it'easily resolvable. Just follow these steps:
 
 3. Load the image and remove the backgrund with the **"magic wand" tool**.
 
-4. Don't forget to crop the image till the border!
+4. Don't forget to **crop the image** till the border!
 
-5. Export the new file as ".png".
+5. Export the new file as **".png"**.
