@@ -88,14 +88,14 @@ while executing:
 
     else:
         frame_index = 0   
+    
+    # ---- SALTO E GRAVITÀ ---- #
 
     if keys[pygame.K_SPACE] and is_jumping:
         frame_index = 1      
 
-    # ---- SALTO E GRAVITÀ ---- #
-
-    velocity_y += gravity           # applica la gravità
-    player_y += velocity_y          # muove il cane in verticale
+    velocity_y += gravity           # Applica la gravità (senza sforare il pavimento)
+    player_y += velocity_y          # Muove il cane in verticale (sarà 0 senza salto)
 
     # --- COLLISIONE CON IL PAVIMENTO --- #
     # Se la parte bassa del cane scende oltre il livello del pavimento

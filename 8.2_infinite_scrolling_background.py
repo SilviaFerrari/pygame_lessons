@@ -84,6 +84,13 @@ while executing:
     else:
         frame_index = 0
 
+    # ---- ANIMAZIONE PLAYER ---- #
+
+    if frame_index >= len(current_frames):
+        frame_index = 1
+        
+    player = current_frames[int(frame_index)]
+
     # --- LOOP INFINITO DEL BACKGROUND --- #
 
     # Se lo sfondo si sposta oltre la sua larghezza, ricomincia
@@ -91,13 +98,6 @@ while executing:
         bg_scroll_x = 0
     if bg_scroll_x >= LENGTH:
         bg_scroll_x = 0
-
-    # ---- ANIMAZIONE PLAYER ---- #
-
-    if frame_index >= len(current_frames):
-        frame_index = 1
-        
-    player = current_frames[int(frame_index)]
 
     # Disegniamo due copie dello sfondo: una in posizione corrente, l’altra subito dopo
     window.blit(background, (bg_scroll_x, 0))
